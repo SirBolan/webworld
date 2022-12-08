@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nolan's Webworld</title>
+    <link rel="shortcut icon" type="image/png" href="img/favicon.png">
+    <!-- <link rel="stylesheet" href="CSS/styles.css" /> -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div class="bg-container">
+    </div>
+    <div class="title">
+      <h1><a class="title-fx">The Webworld</a></h1>
+    </div>
+    <img class="space" src="/img/space.svg" alt="rocket" id="space">
+    <img class="planet" src="/img/space2.svg" alt="planet" id="planet">
+    <nav class="navbar">
+      <div class="navbar__container ">
+        <div class=""></div>
+        <div class="navbar__toggle" id="mobile-menu">
+            <span class="bar"></span> <span class="bar"></span>
+            <span class="bar"></span>
+          </div>
+          <ul class="navbar__menu">
+            <li class="navbar__item">
+              <a href="/games.html" class="navbar__links"> <img src="/img/1784571.svg" alt="game-pad-icon"></a>
+            </li>
+            <li class="navbar__item">
+              <a href="/" class="navbar__links"> <img src="/img/home-icon-silhouette-svgrepo-com.svg" alt="home-icon"></a>
+            </li>
+          <li class="navbar__item">
+            <a href="/pages/about.html" class="navbar__links"> <img src="/img/about.svg" alt="about-icon"></a>
+          </li>
+          </ul>
+          <!-- <div class="game-list">
+            <li class="game-item">
+              ! TBD !
+            </li> -->
+            <div class="main">
+              <div class="main__container">
+                <div class="main__content">
+                  <button class="button"><a href="./pages/login.html">Sign In</a></button>
+                  <div class="games-button">
+                    <a href="/pages/games.html" id="games__logo">
+                      <img src="img/1784571.svg" alt=""></a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <style>
+          * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Questrial', sans-serif;
+            text-decoration: none;
+            transition: all 0.35s;
+          }
+
+          body {
+            background-image: linear-gradient(to right, #5eddce, #6c9cf5);
+            height: 100rem;
+          }
+
+          html {
+            scroll-behavior: smooth;
+          }
+
+          .title {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 4rem;
+            color: white;
+          }
+
+          .title:hover {
+            transition: all 10s ease;
+            color: #7300ff;
+          }
+
+          .space {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(10%, -20%) scale(0.35);
+          }
+
+          .planet {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-90%, -65%) scale(0.2);
+            clip: rect(2);
+          }
+
+          @media screen and (max-width: 911px) {
+            .title {
+              font-size: calc(2vw + 1.5rem);
+            }
+          }
+
+          @media screen and (max-width: 1300px) {
+            .space {
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translate(-45%, -22%) scale(0.25);
+            }
+
+            .planet {
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translate(-30%, -65%) scale(0.3);
+            }
+          }
+
+          @media screen and (max-width: 500px) {
+            .planet {
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -100%) scale(0.5);
+            }
+          }
+
+          .navbar {
+            background-color: transparent;
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+          }
+
+          .navbar__container {
+            display: flex;
+            justify-content: space-between;
+            height: 80px;
+            z-index: 1;
+            width: 100%;
+            max-height: 1300px;
+            margin: 0 auto;
+            padding: 0 50px;
+          }
+
+          .navbar__menu {
+            display: flex;
+            align-items: center;
+            list-style: none;
+            text-align: center;
+          }
+
+          .navbar__links {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 1rem;
+            height: 100%;
+            background-color: transparent;
+            border: transparent;
+            font-size: 1.2rem;
+          }
+
+          .button {
+            font-size: 1rem;
+            padding: 14px 32px;
+            border: none;
+            border-radius: 4px;
+            color: #fff;
+            margin-top: 1rem;
+            position: absolute;
+            top: 0;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.35s;
+            outline: none;
+            background: #2bbbad;
+            background-image: linear-gradient(to top, #2bbbad, #40e5a6);
+            text-decoration: none;
+            position: absolute;
+            right: 75px;
+            display: none;
+          }
+
+          .button a {
+            position: relative;
+            z-index: 2;
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+          }
+
+          .button:after {
+            position: absolute;
+            content: '';
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: #4837ff;
+            transition: all 0.35s;
+            border-radius: 4px;
+          }
+
+          .button:hover {
+            color: #fff;
+            font-size: 1.2rem;
+          }
+
+          .button:hover:after {
+            width: 100%;
+          }
+
+          .games-button {
+            display: flex;
+            margin: 15px;
+            position: absolute;
+            right: 210px;
+            display: none;
+          }
+
+          .games-button:hover {
+            transform: scale(1.15);
+          }
+
+          .navbar__menu {
+            display: none;
+          }
+
+          @media screen and (max-width: 28680px) {
+            .navbar__container {
+              display: flex;
+              justify-content: space-between;
+              height: 80px;
+              z-index: 1;
+              max-width: 28680px;
+              padding: 0;
+            }
+
+            .games-button {
+              display: none;
+            }
+
+            .navbar__menu {
+              display: grid;
+              grid-template-columns: auto;
+              margin: 0;
+              position: absolute;
+              top: 1000px;
+              right: 0;
+              opacity: 0;
+              transition: all 0.4s ease;
+              height: 50vh;
+              z-index: -1;
+            }
+
+            .navbar__menu.active {
+              background: white;
+              opacity: 1;
+              transition: all 0.5s ease;
+              z-index: 99;
+              height: fit-content;
+              font-size: 1.6rem;
+              margin-top: -100px;
+              width: fit-content;
+              position: absolute;
+              top: 70%;
+              right: 1.5%;
+              transform: translate(-1.5%, 30%);
+              border-radius: 7px;
+              box-shadow: 0 11px 36px 0 rgba(39, 41, 56, 0.25);
+            }
+
+            .navbar__toggle .bar {
+              width: 25px;
+              height: 3px;
+              margin: 5px auto;
+              transition: all 0.35 ease-in-out;
+              background: black;
+            }
+
+            .navbar__item {
+              width: 100%;
+            }
+
+            .navbar__links {
+              text-align: center;
+              padding: 2rem;
+              width: 100%;
+              display: table;
+              color: black;
+              font-size: 1.6rem;
+            }
+
+            #mobile-menu {
+              position: absolute;
+              top: 20%;
+              right: 5%;
+              transform: translate(5%, 20%);
+            }
+
+            .navbar__btn {
+              padding-bottom: 2rem;
+            }
+
+            .navbar__toggle .bar {
+              display: block;
+            }
+
+            #mobile-menu.is-active .bar:nth-child(2) {
+              opacity: 0;
+            }
+
+            #mobile-menu.is-active .bar:nth-child(1) {
+              transform: translateY(8px) rotate(45deg);
+            }
+
+            #mobile-menu.is-active .bar:nth-child(3) {
+              transform: translateY(-8px) rotate(-45deg);
+            }
+          }
+        </style>
+      <script>
+        // Login Function
+        function setFormMessage(formElement, type, message) {
+          const messageElement = formElement.querySelector('.form__message');
+
+          messageElement.textContent = message;
+          messageElement.classList.remove(
+            'form__message--success',
+            'form__message--error'
+          );
+          messageElement.classList.add(`form__message--${type}`);
+        }
+
+        function setInputError(inputElement, errorMessage, message) {
+          inputElement.classList.add('form__input--error');
+          inputElement.parentElement.querySelector(
+            '.form__input-error-message'
+          ).textContent = message;
+        }
+
+        function clearInputError(inputElement) {
+          inputElement.classList.remove('form__input--error');
+          inputElement.parentElement.querySelector(
+            '.form__input-error-message'
+          ).textContent = '';
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+          const loginForm = document.querySelector('#login');
+          const createAccountForm = document.querySelector('#createAccount');
+
+          document
+            .querySelector('#linkCreateAccount')
+            .addEventListener('click', (e) => {
+              e.preventDefault();
+              loginForm.classList.add('form--hidden');
+              createAccountForm.classList.remove('form--hidden');
+            });
+
+          document.querySelector('#linkLogin').addEventListener('click', (e) => {
+            e.preventDefault();
+            loginForm.classList.remove('form--hidden');
+            createAccountForm.classList.add('form--hidden');
+          });
+
+          loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            // Preform your AJAX/Fetch login
+
+            setFormMessage(loginForm, 'error', 'Invalid username or password');
+          });
+
+          document.querySelectorAll('.form__input').forEach((inputElement) => {
+            inputElement.addEventListener('blur', (e) => {
+              if (
+                e.target.id === 'signupUsername' &&
+                e.target.value.length > 0 &&
+                e.target.value.length < 10
+              ) {
+                setInputError(
+                  inputElement,
+                  'Username must be atleast 10 characters long'
+                );
+              }
+            });
+
+            inputElement.addEventListener('input', (e) => {
+              clearInputError(inputElement);
+            });
+          });
+        });
+
+        const menu = document.querySelector('#mobile-menu');
+        const menuLinks = document.querySelector('.navbar__menu');
+
+        menu.addEventListener('click', function () {
+          menu.classList.toggle('is-active');
+          menuLinks.classList.toggle('active');
+        });
+
+        function showGames() {
+          document.querySelector('p').style.display = 'block';
+          document.querySelector('h1').style.display = 'block';
+          document.querySelector('article').style.display = 'none';
+        }
+
+        document.getElementById('games__logo').ondragstart = function () {
+          return false;
+        };
+        document.getElementById('space').ondragstart = function () {
+          return false;
+        };
+        document.getElementById('planet').ondragstart = function () {
+          return false;
+        };
+
+      </script>
+  </body>
+</html>
+
+<!-- <div>Icon made from <a href="http://www.onlinewebfonts.com/icon">Icon Fonts</a> is licensed by CC BY 3.0</div> -->
+<!-- <div>Icon made from <a href="http://www.onlinewebfonts.com/icon">Icon Fonts</a> is licensed by CC BY 3.0</div> -->

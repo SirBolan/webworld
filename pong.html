@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Pong</title>
+		<link rel="shortcut icon" type="image/png" href="img/favicon.png" />
+
+		<!-- <img class="pongcons" src="img/pongcons.jfif" alt="pic"> -->
+
+		<!-- <button class="start-button" onclick="showPong()">Play Pong</button>
+		<p class="pong-info">
+			Pong is a 2D computer game that is based off of table tennis. In this
+			games you control one paddle using the arrow keys (on the computer) to
+			move up and down to try and hit the ball back at your opponent. Although
+			if you miss the ball, then the opponent gets a point and vice versa.
+			Computer pong was first created in the year of 1972, November 29 by Atari
+			Inc. At the times the game could only be played on the Magnavox Odyssey,
+			and the Atari 2600.
+		</p>
+		<div class="conscap">This is the Magnavox Odyssey:</div> -->
+
+		<style>
+			* {
+				transition: all 0.35s ease;
+			}
+
+			canvas {
+				display: block;
+				position: absolute;
+				margin: auto;
+				top: 0;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				border-radius: 16px;
+			}
+
+			/* button {
+				text-align: center;
+				margin: auto;
+				display: flex;
+				justify-content: center;
+				display: grid;
+				margin-top: 10%;
+				transform: scale(10);
+				border-radius: 4px;
+				border-style: solid;
+				border-color: #4ff380;
+				background-color: #d4ffc7;
+				cursor: pointer;
+				font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
+					'Lucida Sans', Arial, sans-serif;
+			}
+
+			button:hover {
+				transform: scale(9);
+			} */
+
+			/* canvas {
+				display: none;
+			} */
+
+			/* p {
+				width: 450px;
+				text-align: center;
+				word-wrap: normal;
+				margin: auto;
+				margin-top: 15%;
+				font-size: 20px;
+				display: grid;
+				place-items: center;
+			}
+
+			.pongcons {
+				text-align: center;
+				margin: auto;
+				margin-left: 40%;
+				margin-bottom: -60%;
+			}
+
+			.conscap {
+				font-size: large;
+				text-align: center;
+				margin: auto;
+				display: grid;
+				place-items: center;
+				margin-bottom: 0;
+			}
+
+			@media screen and (max-width: 768px) {
+				p {
+					font-size: 20px;
+					display: grid;
+					place-items: center;
+				}
+			} */
+		</style>
+	</head>
+	<body>
+		<script>
+			var /* Constant variables */
+				WIDTH = 900,
+				HEIGHT = 600,
+				pi = Math.PI,
+				UpArrow = 38,
+				DownArrow = 40,
+				canvas,
+				ctx,
+				keystate,
+				player = {
+					x: null,
+					y: null,
+
+					width: 20,
+					height: 100,
+
+					update: function () {
+						if (keystate[UpArrow]) this.y -= 7;
+						if (keystate[DownArrow]) this.y += 7;
+						this.y = Math.max(Math.min(this.y, HEIGHT - this.height), 0);
+
+						keystate.input.on('pointermove', function (pointer) {
+							player.setPosition(pointer.x, pointer.y);
+						});
+					},
+
+					draw: function () {
+						ctx.fillRect(this.x, this.y, this.width, this.height);
+					},
+				},
+				ai = {
+					x: null,
+					y: null,
+
+					width: 20,
+					height: 100,
+
+					update: function () {
+						var desty = ball.y - (this.height - ball.side) * 0.5;
+						this.y += (desty - this.y) * 0.1;
+						this.y = Math.max(Math.min(this.y, HEIGHT - this.height), 0);
+					},
+
+					draw: function () {
+						ctx.fillRect(this.x, this.y, this.width, this.height);
+					},
+				},
+				ball = {
+					x: null,
+					y: null,
+					vel: null,
+
+					side: 20,
+					speed: 12,
+
+					/**
+					 * @param  {number} side
+					 */
+					serve: function (side) {
+						var r = Math.random();
+						this.x = side === 1 ? player.x + player.width : ai.x - this.side;
+						this.y = (HEIGHT - this.side) * r;
+
+						var phi = 0.1 * pi * (1 - 2 * r);
+
+						this.vel = {
+							x: side * this.speed * Math.cos(phi),
+							y: this.speed * Math.sin(phi),
+						};
+					},
+
+					update: function () {
+						this.x += this.vel.x;
+						this.y += this.vel.y;
+
+						if (0 > this.y || this.y + this.side > HEIGHT) {
+							var offset =
+								this.vel.y < 0 ? 0 - this.y : HEIGHT - (this.y + this.side);
+							this.y += 2 * offset;
+
+							this.vel.y *= -1;
+						}
+
+						var AABBIntersect = function (ax, ay, aw, ah, bx, by, bw, bh) {
+							return (
+								ax < bx + bw && ay < by + bh && bx < ax + aw && by < ay + ah
+							);
+						};
+
+						var pdle = this.vel.x < 0 ? player : ai;
+						if (
+							AABBIntersect(
+								pdle.x,
+								pdle.y,
+								pdle.width,
+								pdle.height,
+								this.x,
+								this.y,
+								this.side,
+								this.side
+							)
+						) {
+							this.x =
+								pdle === player ? player.x + player.width : ai.x - this.side;
+							var n = (this.y + this.side - pdle.y) / (pdle.height + this.side);
+							var phi = 0.25 * pi * (2 * n - 1);
+
+							var smash = Math.abs(phi) > 0.2 * pi ? 1.5 : 1;
+							this.vel.x =
+								smash * (pdle === player ? 1 : -1) * this.speed * Math.cos(phi);
+							this.vel.y = smash * this.speed * Math.sin(phi);
+						}
+
+						if (0 > this.x + this.side || this.x > WIDTH) {
+							this.serve(pdle === player ? 1 : -1);
+						}
+					},
+
+					draw: function () {
+						ctx.fillRect(this.x, this.y, this.side, this.side);
+					},
+				};
+
+			function main() {
+				canvas = document.createElement('canvas');
+				canvas.width = WIDTH;
+				canvas.height = HEIGHT;
+				ctx = canvas.getContext('2d');
+				document.body.appendChild(canvas);
+
+				keystate = {};
+
+				document.addEventListener('keydown', function (evt) {
+					keystate[evt.keyCode] = true;
+				});
+				document.addEventListener('keyup', function (evt) {
+					delete keystate[evt.keyCode];
+				});
+
+				init();
+
+				var loop = function () {
+					update();
+					draw();
+
+					window.requestAnimationFrame(loop, canvas);
+				};
+				window.requestAnimationFrame(loop, canvas);
+			}
+
+			function init() {
+				player.x = player.width;
+				player.y = (HEIGHT - player.height) / 2;
+
+				ai.x = WIDTH - (player.width + ai.width);
+				ai.y = (HEIGHT - ai.height) / 2;
+
+				ball.serve(1);
+			}
+
+			function update() {
+				ball.update();
+				player.update();
+				ai.update();
+			}
+
+			function draw() {
+				ctx.fillRect(0, 0, WIDTH, HEIGHT);
+
+				ctx.save();
+
+				ctx.fillStyle = '#fff';
+
+				ball.draw();
+				player.draw();
+				ai.draw();
+
+				var w = 4;
+				var x = (WIDTH - w) * 0.5;
+				var y = 0;
+				var step = HEIGHT / 20;
+				while (y < HEIGHT) {
+					ctx.fillRect(x, y + step * 0.25, w, step * 0.5);
+					y += step;
+				}
+
+				ctx.restore();
+			}
+
+			function showPong() {
+				document.querySelector('canvas').style.display = 'block';
+				document.querySelector('button').style.display = 'none';
+			}
+
+			// start and run the game
+			main();
+		</script>
+	</body>
+</html>

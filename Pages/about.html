@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Questrial&display=swap"
+			rel="stylesheet"
+		/>
+		<title>Document</title>
+	</head>
+	<body>
+		<p id="counter" class="counter">0</p>
+		<button
+			onclick="change(), upone()"
+			id="nolans super cool website"
+			class="nolans"
+		>
+			This is a test!
+		</button>
+		<a class="home-btn" href="http://127.0.0.1:5500/index.html">Home</a>
+	</body>
+
+	<style>
+		* {
+			transition: all 0.5s;
+		}
+
+		html,
+		body {
+			background-image: linear-gradient(to right, #b1f4fd 0%, #6a69a9 100%);
+		}
+
+		button {
+			width: 50rem;
+		}
+
+		.nolans {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			font-size: 6rem;
+			font-family: 'Questrial', sans-serif;
+			border-radius: 22px;
+			background-image: linear-gradient(to right, #f6d365, #fda085);
+			box-shadow: 0px 0px 10px #2c02ff;
+		}
+
+		.home-btn {
+			font-size: 2rem;
+			font-family: 'Questrial', sans-serif;
+			text-decoration: none;
+		}
+
+		.nolans:hover {
+			transition: all 0.1s;
+			background-image: linear-gradient(to right, #7ad1df, #65a2f8);
+		}
+
+		.counter {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -400%);
+			font-size: 6rem;
+			font-family: 'Questrial', sans-serif;
+			background-color: #f3ec78;
+			background-image: linear-gradient(45deg, #a42b2b, #0008ff);
+			background-size: 100%;
+			-webkit-background-clip: text;
+			-moz-background-clip: text;
+			-webkit-text-fill-color: transparent;
+			-moz-text-fill-color: transparent;
+			background-color: #f3ec78;
+		}
+	</style>
+
+	<script>
+		function change() {
+			var x = document.getElementById('nolans super cool website');
+			if (document.getElementById('counter').innerHTML == '10') {
+				x.innerHTML = 'Is this a test?';
+			}
+			if (document.getElementById('counter').innerHTML == '30') {
+				x.innerHTML = 'Yes!';
+			}
+			if (document.getElementById('counter').innerHTML == '50') {
+				x.innerHTML = 'But is there more?';
+			}
+			if (document.getElementById('counter').innerHTML == '60') {
+				x.innerHTML = 'Maybe...';
+			}
+			if (document.getElementById('counter').innerHTML == '100') {
+				x.innerHTML = 'Triple digits!';
+			}
+		}
+		function upone() {
+			var x = document.getElementById('counter');
+			x.innerHTML = parseInt(x.innerHTML) + 1;
+		}
+	</script>
+</html>
