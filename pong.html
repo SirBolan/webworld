@@ -5,6 +5,8 @@
 		<title>Pong</title>
 		<a class="home-btn" href="https://sirbolan.github.io/webworld/">Home</a>
 		<button class="dev" id="dev" onclick="showDev()">DEV</button>
+		<a class="player_score">0</a>
+		<a class="computer_score">0</a>
 
 		<!-- Basic styling, centering the canvas -->
 		<style>
@@ -27,6 +29,37 @@
 				margin-left: 1rem;
 				margin-top: 1rem;
 			}
+			
+			.player_score {
+				font-size: 1rem;
+				font-family: 'Questrial', sans-serif;
+				text-decoration: none;
+				position: absolute;
+				top: 0;
+				left: 100px;
+				margin-right: 1rem;
+				margin-top: 1rem;
+				cursor: pointer;
+				background: none;
+				border: none;
+				color: black;
+			}
+			
+			.computer_score {
+				font-size: 1rem;
+				font-family: 'Questrial', sans-serif;
+				text-decoration: none;
+				position: absolute;
+				top: 0;
+				right: 100px;
+				margin-right: 1rem;
+				margin-top: 1rem;
+				cursor: pointer;
+				background: none;
+				border: none;
+				color: black;
+			}
+				
 
 			.dev {
 				font-size: 1rem;
