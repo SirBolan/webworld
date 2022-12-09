@@ -49,10 +49,10 @@
 			// alert and option to change speed
 			function showDev() {
 				var choice = prompt(
-					'1: Change Speed of Paddle\n2: Change speed of Ball\n3: Change object color\n4: RESET ALL'
+					'1: Change Speed of Paddle\n2: Change speed of Ball\n3: Change object color\n4: Move left and right\n5: RESET ALL'
 				);
 				if (choice == 1) {
-					var speed = prompt('Enter new speed of paddle (default is 7)');
+					var speed = prompt('Enter new y speed of paddle (default is 7)');
 					defaultSpeed = speed;
 				} else if (choice == 2) {
 					var speed = prompt('Enter new speed of ball (default is 12)');
@@ -61,11 +61,19 @@
 					var color = prompt('Enter object color (color codes are accepted)');
 					defaultColor = color;
 				} else if (choice == 4) {
+					var speed = prompt('Enter new x speed of paddle (default is 0)');
+					defaultSpeedX = speed;
+				} else if (choice == 5) {
 					reset = prompt('Are you sure you want to reset all? (y/n)');
 					if (reset == 'y') {
-						defaultSpeed = 7;
-						ball.speed = 12;
-						defaultColor = 'white';
+						// defaultSpeed = 7;
+						// ball.speed = 12;
+						// defaultColor = 'white';
+						// defaultSpeedX = 0;
+						window.location.href =
+							window.location.pathname +
+							window.location.search +
+							window.location.hash;
 						alert('Reset successful');
 					} else if (reset == 'n') {
 						alert('Reset cancelled');
@@ -85,7 +93,10 @@
 				pi = Math.PI,
 				UpArrow = 38,
 				DownArrow = 40,
+				LeftArrow = 37,
+				RightArrow = 39,
 				defaultSpeed = 7,
+				defaultSpeedX = 0,
 				defaultColor = 'white',
 				/**
 				 * Game elements
@@ -111,8 +122,11 @@
 					update: function () {
 						if (keystate[UpArrow]) this.y -= defaultSpeed;
 						if (keystate[DownArrow]) this.y += defaultSpeed;
+						if (keystate[LeftArrow]) this.x -= defaultSpeedX;
+						if (keystate[RightArrow]) this.x += defaultSpeedX;
 						// keep the paddle inside of the canvas
 						this.y = Math.max(Math.min(this.y, HEIGHT - this.height), 0);
+						this.x = Math.max(Math.min(this.x, WIDTH - this.width), 0);
 					},
 
 					/**
