@@ -49,14 +49,29 @@
 			// alert and option to change speed
 			function showDev() {
 				var choice = prompt(
-					'1: Change Speed of Paddle\n2: Change speed of Ball'
+					'1: Change Speed of Paddle\n2: Change speed of Ball\n3: Change object color\n4: RESET ALL'
 				);
 				if (choice == 1) {
 					var speed = prompt('Enter new speed of paddle (default is 7)');
 					defaultSpeed = speed;
 				} else if (choice == 2) {
-					var speed = prompt('Enter new speed of ball (default is 5)');
+					var speed = prompt('Enter new speed of ball (default is 12)');
 					ball.speed = speed;
+				} else if (choice == 3) {
+					var color = prompt('Enter object color (color codes are accepted)');
+					defaultColor = color;
+				} else if (choice == 4) {
+					reset = prompt('Are you sure you want to reset all? (y/n)');
+					if (reset == 'y') {
+						defaultSpeed = 7;
+						ball.speed = 12;
+						defaultColor = 'white';
+						alert('Reset successful');
+					} else if (reset == 'n') {
+						alert('Reset cancelled');
+					} else {
+						alert('Invalid choice, reset cancelled');
+					}
 				} else {
 					alert('Invalid choice');
 				}
@@ -65,12 +80,13 @@
 			var /**
 				 * Constants
 				 */
-				WIDTH = 700,
+				WIDTH = 940,
 				HEIGHT = 600,
 				pi = Math.PI,
 				UpArrow = 38,
 				DownArrow = 40,
 				defaultSpeed = 7,
+				defaultColor = 'white',
 				/**
 				 * Game elements
 				 */
@@ -301,7 +317,7 @@
 
 				ctx.save();
 
-				ctx.fillStyle = '#fff';
+				ctx.fillStyle = defaultColor;
 
 				ball.draw();
 				player.draw();
