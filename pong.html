@@ -4,9 +4,11 @@
 		<meta charset="UTF-8" />
 		<title>Pong</title>
 		<a class="home-btn" href="https://sirbolan.github.io/webworld/">Home</a>
+		<link rel="shortcut icon" type="image/png" href="img/favicon.png" />
 		<button class="dev" id="dev" onclick="showDev()">DEV</button>
-		<a class="player_score">0</a>
-		<a class="computer_score">0</a>
+		<!-- score -->
+		<a id="player_score"></a>
+		<a id="computer_score"></a>
 
 		<!-- Basic styling, centering the canvas -->
 		<style>
@@ -19,6 +21,7 @@
 				left: 0;
 				right: 0;
 			}
+
 			.home-btn {
 				font-size: 1rem;
 				font-family: 'Questrial', sans-serif;
@@ -29,14 +32,14 @@
 				margin-left: 1rem;
 				margin-top: 1rem;
 			}
-			
-			.player_score {
-				font-size: 1rem;
+
+			#player_score {
+				font-size: 3rem;
 				font-family: 'Questrial', sans-serif;
 				text-decoration: none;
 				position: absolute;
-				top: 0;
-				left: 100px;
+				top: 50px;
+				left: 50px;
 				margin-right: 1rem;
 				margin-top: 1rem;
 				cursor: pointer;
@@ -44,14 +47,14 @@
 				border: none;
 				color: black;
 			}
-			
-			.computer_score {
-				font-size: 1rem;
+
+			#computer_score {
+				font-size: 3rem;
 				font-family: 'Questrial', sans-serif;
 				text-decoration: none;
 				position: absolute;
-				top: 0;
-				right: 100px;
+				top: 50px;
+				right: 50px;
 				margin-right: 1rem;
 				margin-top: 1rem;
 				cursor: pointer;
@@ -59,7 +62,6 @@
 				border: none;
 				color: black;
 			}
-				
 
 			.dev {
 				font-size: 1rem;
@@ -82,7 +84,7 @@
 			// alert and option to change speed
 			function showDev() {
 				var choice = prompt(
-					'1: Change Speed of Paddle\n2: Change speed of Ball\n3: Change object color\n4: Move left and right\n5: RESET ALL'
+					'1: Change Speed of Paddle\n2: Change speed of Ball\n3: Change object color\n4: Move left and right\n5: Change scores (currently being worked on)\n6: RESET ALL'
 				);
 				if (choice == 1) {
 					var speed = prompt('Enter new y speed of paddle (default is 7)');
@@ -97,7 +99,20 @@
 					var speed = prompt('Enter new x speed of paddle (default is 0)');
 					defaultSpeedX = speed;
 				} else if (choice == 5) {
-					reset = prompt('Are you sure you want to reset all? (y/n)');
+					choice = prompt('1: Change player score\n2: Change computer score');
+					if (choice == 1) {
+						var score = prompt('Enter how many points to add to player');
+						playerScore += score;
+					} else if (choice == 2) {
+						var score = prompt('Enter how many points to add to computer');
+						computerScore += score;
+					} else {
+						alert('Invalid choice');
+					}
+				} else if (choice == 6) {
+					reset = prompt(
+						'Are you sure you want to reset all (this will also reset your score)? (y/n)'
+					);
 					if (reset == 'y') {
 						// defaultSpeed = 7;
 						// ball.speed = 12;
@@ -131,6 +146,11 @@
 				defaultSpeed = 7,
 				defaultSpeedX = 0,
 				defaultColor = 'white',
+				playerScore = (document.getElementById('player_score').innerHTML = 0),
+				computerScore = (document.getElementById(
+					'computer_score'
+				).innerHTML = 0),
+				scoreCount = 1,
 				/**
 				 * Game elements
 				 */
@@ -291,6 +311,12 @@
 						// x direction
 						if (0 > this.x + this.side || this.x > WIDTH) {
 							this.serve(pdle === player ? 1 : -1);
+							// update scores
+							if (pdle === player) {
+								computerScore += scoreCount;
+							} else {
+								playerScore += scoreCount;
+							}
 						}
 					},
 
@@ -379,6 +405,9 @@
 					ctx.fillRect(x, y + step * 0.25, w, step * 0.5);
 					y += step;
 				}
+
+				document.getElementById('computer_score').innerHTML = computerScore;
+				document.getElementById('player_score').innerHTML = playerScore;
 
 				ctx.restore();
 			}
