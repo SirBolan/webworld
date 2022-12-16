@@ -9,6 +9,7 @@
 		<!-- score -->
 		<a id="player_score"></a>
 		<a id="computer_score"></a>
+		<a id="what"></a>
 
 		<!-- Basic styling, centering the canvas -->
 		<style>
@@ -131,6 +132,10 @@
 				} else {
 					alert('Invalid choice');
 				}
+			}
+			
+			if(player_score >= 10) {
+				document.getElementById("what").innerHTML = "230133";
 			}
 
 			var /**
