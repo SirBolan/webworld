@@ -22,6 +22,12 @@
 				left: 0;
 				right: 0;
 			}
+			
+			#what {
+				position: absolute;
+				bottom: 10px;
+				left: 10px;
+			}
 
 			.home-btn {
 				font-size: 1rem;
@@ -85,7 +91,7 @@
 			// alert and option to change speed
 			function showDev() {
 				var choice = prompt(
-					'1: Change Speed of Paddle\n2: Change speed of Ball\n3: Change object color\n4: Move left and right\n5: Change scores (currently being worked on)\n6: RESET ALL'
+					'1: Change Speed of Paddle\n2: Change speed of Ball\n3: Change object color\n4: Move left and right\n5: Change scores (currently down)\n6: RESET ALL'
 				);
 				if (choice == 1) {
 					var speed = prompt('Enter new y speed of paddle (default is 7)');
@@ -99,7 +105,7 @@
 				} else if (choice == 4) {
 					var speed = prompt('Enter new x speed of paddle (default is 0)');
 					defaultSpeedX = speed;
-				} else if (choice == 5) {
+				} else if (choice == "devOnly") {
 					choice = prompt('1: Change player score\n2: Change computer score');
 					if (choice == 1) {
 						var score = prompt('Enter how many points to add to player');
@@ -134,7 +140,7 @@
 				}
 			}
 			
-			if(player_score <= 10) {
+			if(player_score >= 10 && computer_score <= 7) {
 				document.getElementById("what").innerHTML = "230133";
 			}
 
