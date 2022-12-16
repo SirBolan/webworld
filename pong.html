@@ -9,7 +9,7 @@
 		<!-- score -->
 		<a id="player_score"></a>
 		<a id="computer_score"></a>
-		<a id="what">wwwo</a>
+		<a id="what"></a>
 
 		<!-- Basic styling, centering the canvas -->
 		<style>
@@ -91,7 +91,7 @@
 			// alert and option to change speed
 			function showDev() {
 				var choice = prompt(
-					'1: Change Speed of Paddle\n2: Change speed of Ball\n3: Change object color\n4: Move left and right\n5: Change scores (currently down)\n6: RESET ALL'
+					'These are all in beta and may have bugs\n1: Change Speed of Paddle\n2: Change speed of Ball\n3: Change object color\n4: Move left and right\n5: Change scores (currently down)\n6: RESET ALL'
 				);
 				if (choice == 1) {
 					var speed = prompt('Enter new y speed of paddle (default is 7)');
@@ -140,7 +140,7 @@
 				}
 			}
 			
-			if(player_score == 15) {
+			if(player_score >= 15) {
 				var x = document.getElementById('what');
 				x.innerHTML = '230133?';
 			}
